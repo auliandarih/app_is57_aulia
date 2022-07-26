@@ -1,5 +1,8 @@
 @extends('layout.master')
 
+@section('title', 'A-Acounting')
+@section('navHome', 'active')
+
 @section('content')
     <div class="wrapper">
         @auth

@@ -7,5 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pengajuan extends Model
 {
-    use HasFactory;
+    public function events(){
+        return $this->hasOne(Event::class,'id','events_id');
+    }
 }

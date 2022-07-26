@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Event;
+use App\Models\Pengajuan;
 use Illuminate\Http\Request;
 
 class PengajuanController extends Controller
@@ -13,7 +15,9 @@ class PengajuanController extends Controller
      */
     public function index()
     {
-        //
+        $nomor = 1;
+        $pengajuan = Pengajuan::all();
+        return view('page.pengajuan.index', compact('pengajuan','nomor'));
     }
 
     /**
@@ -23,7 +27,8 @@ class PengajuanController extends Controller
      */
     public function create()
     {
-        //
+        $event      = Event::all();
+        return view('page.pengajuan.form', compact('event'));
     }
 
     /**
@@ -34,7 +39,17 @@ class PengajuanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $pengajuan = new Pengajuan;
+
+        $pengajuan->tanggal     = $request->tgl;
+        $pengajuan->events_id   = $request->event;
+        $pengajuan->deskripsi   = $request->desk;
+        $pengajuan->harga       = $request->harga;
+        $pengajuan->qty         = $request->qty;
+        $pengajuan->jumlah      = $request->jumlah;
+        $pengajuan->save();
+
+        return redirect('/pengajuan');
     }
 
     /**
@@ -56,7 +71,9 @@ class PengajuanController extends Controller
      */
     public function edit($id)
     {
-        //
+        $event      = Event::all();
+        $pengajuan  = Pengajuan::find($id);
+        return view('page.pengajuan.edit',compact('pengajuan','event'));
     }
 
     /**
@@ -68,7 +85,17 @@ class PengajuanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $pengajuan = Pengajuan::find($id);
+
+        $pengajuan->tanggal     = $request->tgl;
+        $pengajuan->events_id   = $request->event;
+        $pengajuan->deskripsi   = $request->desk;
+        $pengajuan->harga       = $request->harga;
+        $pengajuan->qty         = $request->qty;
+        $pengajuan->jumlah      = $request->jumlah;
+        $pengajuan->save();
+
+        return redirect('/pengajuan');
     }
 
     /**
@@ -79,6 +106,8 @@ class PengajuanController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $pengajuan  = Pengajuan::find($id);
+        $pengajuan->delete();
+        return redirect('/pengajuan');
     }
 }

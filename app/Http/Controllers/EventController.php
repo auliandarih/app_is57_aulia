@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Event;
 use Illuminate\Http\Request;
 
 class EventController extends Controller
@@ -13,7 +14,9 @@ class EventController extends Controller
      */
     public function index()
     {
-        //
+        $nomor = 1;
+        $event = Event::all();
+        return view('page.event.index', compact('event','nomor'));
     }
 
     /**
@@ -23,7 +26,7 @@ class EventController extends Controller
      */
     public function create()
     {
-        //
+        return view('page.event.form');
     }
 
     /**
@@ -34,7 +37,18 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $event = new Event;
+
+        $event->no_event    = $request->no;
+        $event->nm_event    = $request->nama;
+        $event->client      = $request->client;
+        $event->mother_eo   = $request->mother;
+        $event->tgl_mulai   = $request->mulai;
+        $event->tgl_akhir   = $request->akhir;
+        $event->budget      = $request->budget;
+        $event->save();
+
+        return redirect('/event');
     }
 
     /**
@@ -56,7 +70,8 @@ class EventController extends Controller
      */
     public function edit($id)
     {
-        //
+        $event = Event::find($id);
+        return view('page.event.edit',compact('event'));
     }
 
     /**
@@ -68,7 +83,18 @@ class EventController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $event = Event::find($id);
+
+        $event->no_event    = $request->no;
+        $event->nm_event    = $request->nama;
+        $event->client      = $request->client;
+        $event->mother_eo   = $request->mother;
+        $event->tgl_mulai   = $request->mulai;
+        $event->tgl_akhir   = $request->akhir;
+        $event->budget      = $request->budget;
+        $event->save();
+
+        return redirect('/event');
     }
 
     /**
@@ -79,6 +105,8 @@ class EventController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $event  = Event::find($id);
+        $event->delete();
+        return redirect('/event');
     }
 }

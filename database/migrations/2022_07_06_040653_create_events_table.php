@@ -17,6 +17,11 @@ return new class extends Migration
             $table->id();
             $table->string('no_event');
             $table->string('nm_event');
+            $table->string('client');
+            $table->string('mother_eo');
+            $table->date('tgl_mulai');
+            $table->date('tgl_akhir');
+            $table->integer('budget');
             $table->timestamps();
         });
     }
