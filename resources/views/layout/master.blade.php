@@ -316,15 +316,7 @@
                                 </ul>
                             </li> --}}
                             
-                            <li class="nav-header">EXAMPLES</li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <i class="nav-icon fas fa-file-invoice-dollar"></i>
-                                    <p>
-                                        Belum Dikonfirmasi
-                                    </p>
-                                </a>
-                            </li>
+                            {{-- <li class="nav-header">EXAMPLES</li> --}}
                         </ul>
                     </nav>
                     <!-- /.sidebar-menu -->
