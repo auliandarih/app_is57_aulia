@@ -36,7 +36,9 @@
                             </div> --}}
 
                             <div class="" style="float: right">
-                                <a href="/event/form" class="btn btn-sm btn-primary">Tambah Data</a>
+                                @can('create', App\Event::class)
+                                    <a href="/event/form" class="btn btn-sm btn-primary">Tambah Data</a>
+                                @endcan
                             </div>
                         </div>
                         <!-- /.card-header -->
@@ -51,7 +53,10 @@
                                     <th style="vertical-align: middle" rowspan="2">Mother EO</th>
                                     <th colspan="2">Tanggal</th>
                                     <th style="vertical-align: middle" rowspan="2">Budget</th>
-                                    <th style="vertical-align: middle" rowspan="2">Action</th>
+
+                                    @can('create', App\Event::class)
+                                        <th style="vertical-align: middle" rowspan="2">Action</th>
+                                    @endcan
                                 </tr>
                                 </tr>
                                 <tr>
@@ -69,47 +74,50 @@
                                             <td>{{ $item->tgl_mulai }}</td>
                                             <td>{{ $item->tgl_akhir }}</td>
                                             <td>{{ rupiah($item->budget) }}</td>
-                                            <td>
-                                                <a href="/event/edit/{{ $item->id }}"
-                                                    class="btn btn-success btn-sm">edit</a>
+                                            @can('create', App\Event::class)
+                                                <td>
+                                                    <a href="/event/edit/{{ $item->id }}"
+                                                        class="btn btn-success btn-sm">edit</a>
 
-                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
-                                                    data-target="#modal-default{{ $item->id }}">
-                                                    hapus
-                                                </button>
 
-                                                {{-- Modal Hapus --}}
-                                                <div class="modal fade" id="modal-default{{ $item->id }}">
-                                                    <div class="modal-dialog">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h4 class="modal-title">Peringatan</h4>
-                                                                <button type="button" class="close" data-dismiss="modal"
-                                                                    aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                </button>
+                                                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
+                                                        data-target="#modal-default{{ $item->id }}">
+                                                        hapus
+                                                    </button>
+
+                                                    {{-- Modal Hapus --}}
+                                                    <div class="modal fade" id="modal-default{{ $item->id }}">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h4 class="modal-title">Peringatan</h4>
+                                                                    <button type="button" class="close" data-dismiss="modal"
+                                                                        aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    Yakin data Event <b>{{ $item->nm_event }}</b> ingin
+                                                                    dihapus?
+                                                                </div>
+                                                                <div class="modal-footer justify-content-between">
+                                                                    <button type="button" class="btn btn-secondary"
+                                                                        data-dismiss="modal">Batal</button>
+                                                                    <form method="POST" action="/event/{{ $item->id }}">
+                                                                        @csrf
+                                                                        @method('DELETE')
+                                                                        <button type="submit"
+                                                                            class="btn btn-primary">Hapus</button>
+                                                                    </form>
+                                                                </div>
                                                             </div>
-                                                            <div class="modal-body">
-                                                                Yakin data Event <b>{{ $item->nm_event }}</b> ingin
-                                                                dihapus?
-                                                            </div>
-                                                            <div class="modal-footer justify-content-between">
-                                                                <button type="button" class="btn btn-secondary"
-                                                                    data-dismiss="modal">Batal</button>
-                                                                <form method="POST" action="/event/{{ $item->id }}">
-                                                                    @csrf
-                                                                    @method('DELETE')
-                                                                    <button type="submit"
-                                                                        class="btn btn-primary">Hapus</button>
-                                                                </form>
-                                                            </div>
+                                                            <!-- /.modal-content -->
                                                         </div>
-                                                        <!-- /.modal-content -->
+                                                        <!-- /.modal-dialog -->
                                                     </div>
-                                                    <!-- /.modal-dialog -->
-                                                </div>
-                                                <!-- /.modal -->
-                                            </td>
+                                                    <!-- /.modal -->
+                                                </td>
+                                            @endcan
                                         </tr>
                                     @empty
                                         <tr>

@@ -24,7 +24,7 @@
                                 @csrf
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Nomor Event</label>
+                                        <label for="exampleInputEmail1">kode tujuan</label>
                                         <input type="text" name="no" class="form-control" id="exampleInputEmail1">
                                     </div>
                                     <div class="form-group">

@@ -37,6 +37,7 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', Event::class);
         $event = new Event;
 
         $event->no_event    = $request->no;
